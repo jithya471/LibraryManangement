@@ -1,0 +1,23 @@
+ .wrap{
+    background-color: whitesmoke;
+    padding-block: 50px;
+    max-width: 100%;
+    align-self: center;
+    
+} 
+.form{
+    background-color: whitesmoke;
+   text-align: center;
+   align-items: center; 
+    
+}
+.input{
+    width: 300px;
+}
+body{
+    text-align: center;
+}
+h3{
+    text-align: center;
+    padding-bottom: 3px;
+}
