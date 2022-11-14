@@ -1,40 +1,65 @@
-import React from 'react'
+import axios from '../../axios';
+import React, { useRef, useState } from 'react'
 import { Container, Row } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 import './Login.css';
-import Col from 'react-bootstrap/Col';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
+
+  const useremail = useRef('')
+  const userpassword = useRef('')
+  const navigate = useNavigate()
+
+  const handlesubmit = (e) =>{
+    e.preventDefault();
+    const email = useremail.current.value;
+    const password = userpassword.current.value;
+
+    axios({
+      method:'post',
+      url:'/user/login',
+      data:{
+        email,
+        password
+      }
+    }).then((response)=>{
+      navigate('/home')
+      if(response.data){
+        alert("Logged in")
+      }
+      else{
+        alert("wrong email & password")
+      }
+    }).catch((error)=>{
+      console.log(error)
+    })
+  }
+
   return (
     <>
     <Container className="mt-5 pt-5 justify-content-center">
-      <Row className="justify-content-center wrap">
-        
-    <Container >
-    <Row className="mb-3 justify-content-center">
-    <h3>Login</h3>
-    <Form className='form justify-content-center'>
-    <Row className="mb-3 justify-content-center">
-      <Form.Group as={Col} md="4" className="mb-3 input" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" />
-        <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
-        </Form.Text>
-      </Form.Group></Row>
-      <Row className="mb-3 justify-content-center">
-      <Form.Group as={Col} md="4" className="mb-3 input" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control type="password" placeholder="Password" />
-      </Form.Group></Row>
-
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
-    </Form></Row>
-    </Container>
-    </Row>
+    
+    <div className="card mt-5 shadow" style={{width:"25rem"}}>
+      <form  className="row g-3 needs-validation justify-content-center mt-2" style={{padding:"40px"}}
+      onSubmit={handlesubmit}>
+      <div className="row justify-content-md-center">
+      <div className="col-md-auto">
+    <label htmlFor="email" className="form-label">E-Mail</label>
+    <input type="email" className="form-control" id="email" required ref={useremail}/>
+    </div>
+  </div>
+  <div className="row justify-content-md-center mt-2">
+      <div className="col-md-auto">
+    <label htmlFor="password" className="form-label">Password</label>
+    <input type="password" className="form-control" id="password"  required ref={userpassword}/>
+    </div>
+  </div>
+  <div className="col-12">
+    <button className="btn btn-primary " style={{alignSelf:"center"}} type="submit">Login</button>
+  </div>
+  </form>
+      </div>  
+    
     </Container>
     </>
   )

@@ -1,82 +1,103 @@
-import React, { useState } from "react";
-import { Container, Row } from "react-bootstrap";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import InputGroup from "react-bootstrap/InputGroup";
+import axios from "../../axios";
+import { useRef } from "react";
+import { Container } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+
+
 
 function RegisterPage() {
-  const [validated, setValidated] = useState(false);
+  const fullname = useRef()
+  const add = useRef()
+  const usergender = useRef()
+  const useremail = useRef()
+  const userpassword = useRef()
+  const dateofbirth = useRef()
+  const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    } else {
-      alert("Welcome");
-    }
 
-    setValidated(true);
-  };
+  const handleSubmit = (e)=>{
+
+    e.preventDefault()
+    const userName = fullname.current.value;
+    const address = add.current.value;
+    const dob = dateofbirth.current.value;
+    const email = useremail.current.value;
+    const password = userpassword.current.value;
+    const gender = usergender.current.value;
+
+
+    axios({
+      method: 'post',
+      url: '/user/signup',
+      data:{
+        userName,
+        address,
+        dob,
+        email,
+        password,
+        gender
+      }
+    }).then((response)=>{
+      navigate("/login")
+      if(response.data){
+        alert("Welcome " + userName)
+      }
+      else{
+        alert("user already exist")
+      }
+    }).catch((error)=>{
+      console.log(error);
+    })
+  }
+
   return (
     <>
       <Container className="mt-5 pt-5 justify-content-center">
-        <Row className="justify-content-center">
-          <Form noValidate validated={validated} onSubmit={handleSubmit}>
-            <Row className="mb-3">
-              <Form.Group as={Col} md="4" controlId="validationCustom01">
-                <Form.Label>Name</Form.Label>
-                <Form.Control required type="text" placeholder="name" />
-              </Form.Group>
-              <Form.Group as={Col} md="4" controlId="validationCustom02">
-                <Form.Label>Address</Form.Label>
-                <Form.Control required type="text" placeholder="address" />
-              </Form.Group>
-              <Form.Group as={Col} md="4" controlId="validationCustomUsername">
-                <Form.Label>Date of Birth</Form.Label>
-                <InputGroup hasValidation>
-                    <Form.Control
-                    type="date"
-                    placeholder="dob"
-                    aria-describedby="inputGroupPrepend"
-                    required
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    Please choose a username.
-                  </Form.Control.Feedback>
-                </InputGroup>
-              </Form.Group>
-            </Row>
-            <Row className="mb-3">
-              <Form.Group as={Col} md="4" controlId="validationCustom03">
-                <Form.Label>E-mail Address</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" required />
-                <Form.Control.Feedback type="invalid">
-                  Please provide a valid email-id.
-                </Form.Control.Feedback>
-              </Form.Group>
+        
+      <form onSubmit={handleSubmit} className="row g-3 needs-validation" >
+      <div className="col-md-4">
+    <label htmlFor="name" className="form-label">Full Name</label>
+    <input type="text" className="form-control" id="name" required ref={fullname}/>
+    
+  </div>
+  <div className="col-md-4">
+    <label htmlFor="address" className="form-label">Address</label>
+    <input type="text" className="form-control" id="address"  required ref={add}/>
+    
+  </div>
+  <div className="col-md-4">
+  <label htmlFor="gender" className="form-label">Gender</label>
+  <select className="form-select" ref={usergender}>
+  <option defaultChecked>select menu</option>
+  <option value="male">Male</option>
+  <option value="female">Female</option>
+  <option value="other">Others</option>
+</select>
+      
+  </div>
+  
+  <div className="col-md-4">
+  <label htmlFor="email" className="form-label">E-Mail Id</label>
+    <input type="email" className="form-control" id="email" required ref={useremail}/>
+  </div>
 
-              <Form.Group as={Col} md="4" controlId="validationCustom04">
-                <Form.Label>City</Form.Label>
-                <Form.Control type="text" placeholder="city" required />
-                <Form.Control.Feedback type="invalid">
-                  Please provide a valid city.
-                </Form.Control.Feedback>
-              </Form.Group>
-
-              <Form.Group as={Col} md="4" controlId="validationCustom05">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="password" required />
-                <Form.Control.Feedback type="invalid">
-                  Please provide a valid password.
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Row>
-            
-            <Button type="submit">Register</Button>
-          </Form>
-        </Row>
+  <div className="col-md-4">
+    <label htmlFor="password" className="form-label">Password</label>
+    <input type="password" className="form-control" id="validationCustom03" required ref={userpassword}/>
+    
+  </div>
+  
+  <div className="col-md-4">
+    <label htmlFor="dob" className="form-label">Date of Birth</label>
+    <input type="date" className="form-control" id="dob" required ref={dateofbirth}/>
+    
+  </div>
+  
+  <div className="col-12">
+    <button className="btn btn-primary" type="submit">Register</button>
+  </div>
+</form>
+        
       </Container>
     </>
   );
