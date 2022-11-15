@@ -1,6 +1,6 @@
 import axios from '../../axios';
 import React, { useRef, useState } from 'react'
-import { Container, Row } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import './Login.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -23,9 +23,11 @@ function Login() {
         password
       }
     }).then((response)=>{
-      navigate('/home')
+      
       if(response.data){
         alert("Logged in")
+        navigate('/home')
+        console.log(response.data.userName)
       }
       else{
         alert("wrong email & password")

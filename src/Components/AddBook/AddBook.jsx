@@ -26,7 +26,7 @@ function AddBook() {
 
     axios({
       method:'post',
-      url:'/admin/addbooks',
+      url:'/book/addbooks',
       data:{
         isbn,
         bookName,

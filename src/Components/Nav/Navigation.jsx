@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Navbar, Button, Nav } from "react-bootstrap";
+import { Container, Navbar, Button, Nav, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./Navigation.css";
 
@@ -26,6 +26,12 @@ function Navigation() {
             Login
           </Button>
         </Link></Nav>
+
+        <Nav>
+          <NavDropdown title="user name">
+            <NavDropdown.Item>Log Out</NavDropdown.Item>
+          </NavDropdown>
+        </Nav>
       </Navbar>
     </div>
   );
