@@ -9,6 +9,7 @@ import Home from './Components/Home/Home'
 import Navigation from './Components/Nav/Navigation';
 import AddBook from './Components/AddBook/AddBook';
 import Edit from './Components/Admin/Edit';
+import Checkout from './Components/UserCheckout/Checkout';
 function App() {
   return (
     <div className="App">
@@ -22,7 +23,8 @@ function App() {
       <Route path='login' element={<Login/>}/>
       <Route path='/admin' element={<Admin/>}/>
       <Route path='addbook' element={<AddBook/>}/>
-      <Route path='edit/:id' element={<Edit/>}/>
+      <Route path='/admin/edit/:bookId' element={<Edit/>}/>
+      <Route path='/orders' element={<Checkout/>}/>
       </Routes>
       </BrowserRouter>
         </div>

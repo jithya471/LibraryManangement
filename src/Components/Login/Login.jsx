@@ -25,8 +25,17 @@ function Login() {
     }).then((response)=>{
       
       if(response.data){
+        localStorage.setItem("isLoggedIn", true)
+        localStorage.setItem("userId", response.data.id)
+        localStorage.setItem("userRole", response.data.role)
+        localStorage.setItem("userName", response.data.userName)
+        if(response.data.role === 'admin'){
+          navigate("/admin")
+        } else {
+          navigate("/home")
+        }
+
         alert("Logged in")
-        navigate('/home')
         console.log(response.data.userName)
       }
       else{

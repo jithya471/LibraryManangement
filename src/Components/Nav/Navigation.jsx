@@ -1,9 +1,25 @@
-import React from "react";
-import { Container, Navbar, Button, Nav, NavDropdown } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Container, Navbar, Button, Nav } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 import "./Navigation.css";
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 
 function Navigation() {
+
+  const [showDropdown, setShowDropdown] = useState(false)
+ 
+  const navigate = useNavigate()
+  const role = localStorage.getItem("userRole")
+  console.log(role)
+
+
+
+  const handleClick = () =>{
+    setShowDropdown(!showDropdown)
+    localStorage.clear()  
+    navigate('/login')
+  }
   return (
     <div>
       <Navbar fixed="top" bg="primary" varient="light" className="justify-content-center">
@@ -16,22 +32,56 @@ function Navigation() {
             Home
           </Button>
         </Link>
-        <Link to={"signup"}>
+        {
+              role ? (
+              <DropdownButton
+                size="sm"
+                variant="primary"
+                title={localStorage.getItem("userName")}
+                id="input-group-dropdown-1"
+              >
+                <Dropdown.Item onClick={handleClick} >Logout</Dropdown.Item>
+                
+              </DropdownButton>
+            ) :  (
+              <Link to={"/login"}>
           <Button variant="primary" size="sm">
-            Register
-          </Button>
-        </Link>
-        <Link to={"/login"}>
-          <Button variant="primary" size="sm" >
             Login
           </Button>
-        </Link></Nav>
+        </Link> 
+            )
+             }   
+             <Link to={"/orders"}>
+              {role === "user"? (
+          <Button variant="primary" size="sm" disabled={role==="admin"}>
+            Orders
+          </Button>) : null
+}
+          
+        </Link> 
 
-        <Nav>
-          <NavDropdown title="user name">
-            <NavDropdown.Item>Log Out</NavDropdown.Item>
-          </NavDropdown>
+             <Link to={"/signup"}>
+              {!role ? (
+          <Button variant="primary" size="sm" disabled={role==="admin"}>
+            Register
+          </Button>) : null
+}
+          
+        </Link>
+            
+      
+        
+         
+
+               
+               
+                
+                      
+      
+         
         </Nav>
+
+        
       </Navbar>
     </div>
   );

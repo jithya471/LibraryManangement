@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 import "./Admin.css";
 import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "../../axios";
 
 function Admin() {
   const [bookData, setBookData] = useState([]);
-
+  const {bookId} = useParams()
+  const [update, setUpdate] = useState()
+  
   useEffect(() => {
     axios
       .get("/book/view")
@@ -18,12 +20,21 @@ function Admin() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+     
+  }, [update]);
+
+  const deleteBook = (bookId)=>{
+    axios.delete(`book/deletebook/${bookId}`).then((response)=>{
+      setUpdate(response.data).catch((error)=>console.log(error))
+    })
+  }
+
+  
 
   return (
     <>
       <Container className="mt-5 pt-5 justify-content-center">
-        <table className="table table-striped-columns">
+        <table className="table table-striped-columns shadow">
           <thead>
             <tr>
               <th>Sl.No.</th>
@@ -37,7 +48,7 @@ function Admin() {
           </thead>
           <tbody>
             {bookData.map((book) => (
-              <tr key={book.id}>
+              <tr key={book.id} >
                 <td>{book.id}</td>
                 <td>{book.isbn}</td>
                 <td>{book.bookName}</td>
@@ -46,14 +57,16 @@ function Admin() {
                 <td>{book.balCopies}</td>
                 <td>
                   <div>
-                  <Link to={"/edit/$(book.id)"}>
-                    <Button variant="secondary" size="sm">
-                      Edit
-                    </Button>{" "}</Link>
-                    <Button variant="secondary" size="sm">
+                  <div>
+                    <Link  to={`/admin/edit/${book.id}`}>
+                      <Button variant="secondary" size="sm">
+                      Edit</Button>
+                    </Link></div>
+                    <div className="m-2 ">
+                    <Button variant="secondary" size="sm" onClick={()=>deleteBook(book.id)}>
                       Delete
-                    </Button>{" "}
-                  
+                    </Button>
+                    </div>
                   </div>
                 </td>
               </tr>
@@ -62,7 +75,7 @@ function Admin() {
         </table>
         <div className="btn">
           <Link to={"/addbook"}>
-            <Button variant="primary" size="sm">
+            <Button variant="primary" size="sm" style={{alignSelf:"center"}}>
               Add Book
             </Button>{" "}
           </Link>

@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 function Home() {
   const [items, setItems] = useState([])
-
+  const role = localStorage.getItem("userRole")
   useEffect(()=>{
     axios
     .get("/book/view")
@@ -20,6 +20,7 @@ function Home() {
   })
   return (
     <>
+    
       <Container className="mt-5 pt-5 justify-content-center">
         <Row className="justify-content-center ">
           {items.map((item)=>(
@@ -30,8 +31,9 @@ function Home() {
                 <Card.Text style={{ alignSelf: "center", justifyContent: "center" }}>
                   Author : {item.author}
                 </Card.Text>
-                <Link to={"/login"}>
-                <Button style={{ alignSelf: "center" }} variant="primary">Checkout</Button></Link>
+                
+                <Link to={role === "user" ? "/orders" : "/home"}>
+                <Button style={{ alignSelf: "center" }} variant="primary" disabled={(role==="admin")}>Checkout</Button></Link>
               </Card.Body>
             </Card>
 
