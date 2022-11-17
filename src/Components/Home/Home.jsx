@@ -18,11 +18,11 @@ function Home() {
     axios.get(`/user/getUser/${userId}`).then((response) => {
       const currentDate = moment(new Date());
 
-      response.data.orders.forEach((element) => {
+      response.data.orders?.forEach((element) => {
         const checkoutDate = moment(element.checkoutDate);
         if (currentDate.diff(checkoutDate, "days") > 14) {
           setWarning(true);
-        }
+        };
       });
     });
 
