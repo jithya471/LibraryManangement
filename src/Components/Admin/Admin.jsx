@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 import "./Admin.css";
 import Button from "react-bootstrap/Button";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "../../axios";
 
@@ -10,6 +10,13 @@ function Admin() {
   const [bookData, setBookData] = useState([]);
   const {bookId} = useParams()
   const [update, setUpdate] = useState()
+const navigate = useNavigate()
+
+  useEffect(()=>{
+    if(!(localStorage.getItem("userRole")==="admin")){
+      return navigate('/')
+    }
+  },[])
   
   useEffect(() => {
     axios
