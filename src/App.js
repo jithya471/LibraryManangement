@@ -10,12 +10,12 @@ import Navigation from './Components/Nav/Navigation';
 import AddBook from './Components/AddBook/AddBook';
 import Edit from './Components/Admin/Edit';
 import Checkout from './Components/UserCheckout/Checkout';
+import NotFound from './NotFound';
 function App() {
   return (
     <div className="App">
       
       <BrowserRouter>
-      <Navigation />
       <Routes>
       <Route index element={<Home/>}/>
       <Route path='home' element={<Home/>}/>
@@ -25,6 +25,7 @@ function App() {
       <Route path='addbook' element={<AddBook/>}/>
       <Route path='/admin/edit/:bookId' element={<Edit/>}/>
       <Route path='/orders' element={<Checkout/>}/>
+      <Route path='*' element={<NotFound />}/>
       </Routes>
       </BrowserRouter>
         </div>

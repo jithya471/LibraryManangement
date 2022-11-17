@@ -3,6 +3,7 @@ import "./AddBook.css";
 import React, { useRef } from "react";
 import axios from "../../axios";
 import { useNavigate } from "react-router-dom";
+import Navigation from "../Nav/Navigation";
 
 function AddBook() {
   const isbnno = useRef("");
@@ -50,6 +51,8 @@ function AddBook() {
 
   return (
     <>
+          <Navigation />
+
       <Container className="mt-5 pt-5 justify-content-center">
         <div className="card mt-3 pb-5 shadow" style={{ width: "50rem" }}>
           <h3 className="mt-5">Add Book</h3>
