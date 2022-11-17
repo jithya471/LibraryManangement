@@ -37,7 +37,7 @@ function Admin() {
 
   return (
     <>
-          <Navigation />
+      <Navigation />
 
       <Container className="mt-5 pt-5 justify-content-center">
         <table className="table table-striped-columns shadow">

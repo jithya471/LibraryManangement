@@ -23,7 +23,7 @@ function Home() {
         const checkoutDate = moment(element.checkoutDate);
         if (currentDate.diff(checkoutDate, "days") > 14) {
           setWarning(true);
-        };
+        }
       });
     });
 
@@ -58,7 +58,7 @@ function Home() {
   };
   return (
     <>
-          <Navigation />
+      <Navigation />
 
       <Container className="mt-5 pt-5 justify-content-center">
         {warning && (

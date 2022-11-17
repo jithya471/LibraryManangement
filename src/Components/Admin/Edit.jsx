@@ -62,7 +62,7 @@ function Edit() {
       .then((response) => {
         if (response.data) {
           alert(bookName + " details Updated");
-          navigate('/admin')
+          navigate("/admin");
         } else {
           alert("error");
         }
@@ -72,7 +72,7 @@ function Edit() {
 
   return (
     <>
-          <Navigation />
+      <Navigation />
 
       <Container className="mt-5 pt-5 justify-content-center">
         <div className="card mt-3 pb-5 shadow" style={{ width: "50rem" }}>

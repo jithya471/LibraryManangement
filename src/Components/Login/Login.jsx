@@ -48,7 +48,7 @@ function Login() {
 
   return (
     <>
-          <Navigation />
+      <Navigation />
 
       <Container className="mt-5 pt-5 justify-content-center">
         <div className="card mt-5 shadow" style={{ width: "25rem" }}>

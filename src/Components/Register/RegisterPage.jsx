@@ -49,7 +49,7 @@ function RegisterPage() {
 
   return (
     <>
-          <Navigation />
+      <Navigation />
 
       <Container className="mt-5 pt-5 justify-content-center">
         <form onSubmit={handleSubmit} className="row g-3 needs-validation">

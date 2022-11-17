@@ -25,7 +25,7 @@ function Checkout() {
 
   return (
     <>
-          <Navigation />
+      <Navigation />
 
       <Container className="mt-5 pt-5">
         <h3>List Of Books taken</h3>
