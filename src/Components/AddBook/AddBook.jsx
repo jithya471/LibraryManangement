@@ -5,48 +5,47 @@ import axios from "../../axios";
 import { useNavigate } from "react-router-dom";
 
 function AddBook() {
-
-  const isbnno = useRef('')
-  const book = useRef('')
-  const bookAuthor = useRef('')
-  const total = useRef('')
-  const bal = useRef('')
-  const img = useRef('')
-  const navigate = useNavigate()
+  const isbnno = useRef("");
+  const book = useRef("");
+  const bookAuthor = useRef("");
+  const total = useRef("");
+  const bal = useRef("");
+  const img = useRef("");
+  const navigate = useNavigate();
 
   const handlesubmit = (e) => {
     e.preventDefault();
 
-    const isbn = isbnno.current.value
-    const bookName = book.current.value
-    const author = bookAuthor.current.value
-    const totalNo = total.current.value
-    const balCopies = bal.current.value
-    const image = img.current.value
+    const isbn = isbnno.current.value;
+    const bookName = book.current.value;
+    const author = bookAuthor.current.value;
+    const totalNo = total.current.value;
+    const balCopies = bal.current.value;
+    const image = img.current.value;
 
     axios({
-      method:'post',
-      url:'/book/addbooks',
-      data:{
+      method: "post",
+      url: "/book/addbooks",
+      data: {
         isbn,
         bookName,
         author,
         totalNo,
         balCopies,
-        image
-      }
-    }).then((response)=>{
-      navigate('/admin')
-      if(response.data){
-        alert("Added")
-      }
-      else{
-        alert("Already exist")
-      }
-    }).catch((error)=>{
-      console.log(error);
+        image,
+      },
     })
-
+      .then((response) => {
+        navigate("/admin");
+        if (response.data) {
+          alert("Added");
+        } else {
+          alert("Already exist");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -131,15 +130,20 @@ function AddBook() {
                   type="text"
                   className="form-control"
                   id="image"
-
                   ref={img}
                   required
                 />
               </div>
             </div>
             <div className="col-12">
-    <button className="btn btn-primary " style={{alignSelf:"center"}} type="submit">Add</button>
-  </div>
+              <button
+                className="btn btn-primary "
+                style={{ alignSelf: "center" }}
+                type="submit"
+              >
+                Add
+              </button>
+            </div>
           </form>
         </div>
       </Container>

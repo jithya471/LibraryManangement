@@ -4,7 +4,7 @@ import { Container, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import "./Home.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import moment from "moment/moment";
 
 function Home() {
@@ -12,7 +12,7 @@ function Home() {
   const [warning, setWarning] = useState(false);
 
   const role = localStorage.getItem("userRole");
-  const userId = localStorage.getItem("userId")
+  const userId = localStorage.getItem("userId");
   const navigate = useNavigate();
   useEffect(() => {
     axios.get(`/user/getUser/${userId}`).then((response) => {
@@ -59,7 +59,7 @@ function Home() {
     <>
       <Container className="mt-5 pt-5 justify-content-center">
         {warning && (
-          <div className="alert alert-danger" style={{textAlign:"center"}}>
+          <div className="alert alert-danger" style={{ textAlign: "center" }}>
             Time out to return Book
           </div>
         )}

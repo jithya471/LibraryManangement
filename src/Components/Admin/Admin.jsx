@@ -2,22 +2,21 @@ import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 import "./Admin.css";
 import Button from "react-bootstrap/Button";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "../../axios";
 
 function Admin() {
   const [bookData, setBookData] = useState([]);
-  const {bookId} = useParams()
-  const [update, setUpdate] = useState()
-const navigate = useNavigate()
+  const [update, setUpdate] = useState();
+  const navigate = useNavigate();
 
-  useEffect(()=>{
-    if(!(localStorage.getItem("userRole")==="admin")){
-      return navigate('/')
+  useEffect(() => {
+    if (!(localStorage.getItem("userRole") === "admin")) {
+      return navigate("/");
     }
-  },[])
-  
+  }, []);
+
   useEffect(() => {
     axios
       .get("/book/view")
@@ -27,16 +26,13 @@ const navigate = useNavigate()
       .catch((error) => {
         console.log(error);
       });
-     
   }, [update]);
 
-  const deleteBook = (bookId)=>{
-    axios.delete(`book/deletebook/${bookId}`).then((response)=>{
-      setUpdate(response.data).catch((error)=>console.log(error))
-    })
-  }
-
-  
+  const deleteBook = (bookId) => {
+    axios.delete(`book/deletebook/${bookId}`).then((response) => {
+      setUpdate(response.data).catch((error) => console.log(error));
+    });
+  };
 
   return (
     <>
@@ -55,7 +51,7 @@ const navigate = useNavigate()
           </thead>
           <tbody>
             {bookData.map((book) => (
-              <tr key={book.id} >
+              <tr key={book.id}>
                 <td>{book.id}</td>
                 <td>{book.isbn}</td>
                 <td>{book.bookName}</td>
@@ -64,15 +60,21 @@ const navigate = useNavigate()
                 <td>{book.balCopies}</td>
                 <td>
                   <div>
-                  <div>
-                    <Link  to={`/admin/edit/${book.id}`}>
-                      <Button variant="secondary" size="sm">
-                      Edit</Button>
-                    </Link></div>
+                    <div>
+                      <Link to={`/admin/edit/${book.id}`}>
+                        <Button variant="secondary" size="sm">
+                          Edit
+                        </Button>
+                      </Link>
+                    </div>
                     <div className="m-2 ">
-                    <Button variant="secondary" size="sm" onClick={()=>deleteBook(book.id)}>
-                      Delete
-                    </Button>
+                      <Button
+                        variant="secondary"
+                        size="sm"
+                        onClick={() => deleteBook(book.id)}
+                      >
+                        Delete
+                      </Button>
                     </div>
                   </div>
                 </td>
@@ -82,7 +84,7 @@ const navigate = useNavigate()
         </table>
         <div className="btn">
           <Link to={"/addbook"}>
-            <Button variant="primary" size="sm" style={{alignSelf:"center"}}>
+            <Button variant="primary" size="sm" style={{ alignSelf: "center" }}>
               Add Book
             </Button>{" "}
           </Link>

@@ -6,16 +6,15 @@ import TableRow from "./TableRow";
 function Checkout() {
   const [orders, setOrders] = useState([]);
   const [update, setUpdate] = useState(false);
-  
+
   useEffect(() => {
-    const userId = localStorage.getItem("userId")
-   
+    const userId = localStorage.getItem("userId");
+
     axios
       .get(`/user/getUser/${userId}`)
       .then((response) => {
-        if (response.data){
-        setOrders(response.data.orders);
-        
+        if (response.data) {
+          setOrders(response.data.orders);
         }
       })
       .catch((error) => {
@@ -39,7 +38,11 @@ function Checkout() {
           </thead>
           <tbody>
             {orders.map((order) => (
-              <TableRow order={order} key={order.bookId} setUpdate={() => setUpdate(!update)}/>
+              <TableRow
+                order={order}
+                key={order.bookId}
+                setUpdate={() => setUpdate(!update)}
+              />
             ))}
           </tbody>
         </table>
