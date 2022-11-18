@@ -22,7 +22,7 @@ function Navigation() {
         fixed="top"
         bg="primary"
         varient="light"
-        className="justify-content-center"
+        className="justify-content-center shadow"
       >
         <Container>
           <Navbar.Brand href="/">Library Management</Navbar.Brand>
