@@ -2,7 +2,6 @@ import axios from "../../axios";
 import React, { useEffect, useState, useRef } from "react";
 import { Container } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
-import Navigation from "../Nav/Navigation";
 
 function Edit() {
   const [books, setBooks] = useState();
@@ -72,7 +71,6 @@ function Edit() {
 
   return (
     <>
-      <Navigation />
 
       <Container className="mt-5 pt-5 justify-content-center">
         <div className="card mt-3 pb-5 shadow" style={{ width: "50rem" }}>

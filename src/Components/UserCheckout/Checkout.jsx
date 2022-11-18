@@ -3,7 +3,7 @@ import { Container } from "react-bootstrap";
 import axios from "../../axios";
 import { useEffect } from "react";
 import TableRow from "./TableRow";
-import Navigation from "../Nav/Navigation";
+
 function Checkout() {
   const [orders, setOrders] = useState([]);
   const [update, setUpdate] = useState(false);
@@ -25,7 +25,6 @@ function Checkout() {
 
   return (
     <>
-      <Navigation />
 
       <Container className="mt-5 pt-5">
         <h3>List Of Books taken</h3>

@@ -6,7 +6,6 @@ import Card from "react-bootstrap/Card";
 import "./Home.css";
 import { useNavigate } from "react-router-dom";
 import moment from "moment/moment";
-import Navigation from "../Nav/Navigation";
 
 function Home() {
   const [items, setItems] = useState([]);
@@ -58,7 +57,6 @@ function Home() {
   };
   return (
     <>
-      <Navigation />
 
       <Container className="mt-5 pt-5 justify-content-center">
         {warning && (

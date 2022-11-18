@@ -9,10 +9,12 @@ import AddBook from "./Components/AddBook/AddBook";
 import Edit from "./Components/Admin/Edit";
 import Checkout from "./Components/UserCheckout/Checkout";
 import NotFound from "./NotFound";
+import Navigation from "./Components/Nav/Navigation";
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
+      <Navigation/>
         <Routes>
           <Route index element={<Home />} />
           <Route path="home" element={<Home />} />

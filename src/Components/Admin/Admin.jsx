@@ -5,7 +5,6 @@ import Button from "react-bootstrap/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "../../axios";
-import Navigation from "../Nav/Navigation";
 
 function Admin() {
   const [bookData, setBookData] = useState([]);
@@ -37,7 +36,6 @@ function Admin() {
 
   return (
     <>
-      <Navigation />
 
       <Container className="mt-5 pt-5 justify-content-center">
         <table className="table table-striped-columns shadow">

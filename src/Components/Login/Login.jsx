@@ -3,7 +3,6 @@ import React, { useRef } from "react";
 import { Container } from "react-bootstrap";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
-import Navigation from "../Nav/Navigation";
 
 function Login() {
   const useremail = useRef("");
@@ -48,7 +47,6 @@ function Login() {
 
   return (
     <>
-      <Navigation />
 
       <Container className="mt-5 pt-5 justify-content-center">
         <div className="card mt-5 shadow" style={{ width: "25rem" }}>

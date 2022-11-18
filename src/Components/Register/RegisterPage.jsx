@@ -2,7 +2,6 @@ import axios from "../../axios";
 import { useRef } from "react";
 import { Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import Navigation from "../Nav/Navigation";
 
 function RegisterPage() {
   const fullname = useRef();
@@ -49,7 +48,6 @@ function RegisterPage() {
 
   return (
     <>
-      <Navigation />
 
       <Container className="mt-5 pt-5 justify-content-center">
         <form onSubmit={handleSubmit} className="row g-3 needs-validation">
