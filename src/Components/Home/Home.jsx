@@ -83,7 +83,7 @@ function Home() {
                 <Button
                   style={{ alignSelf: "center" }}
                   variant="primary"
-                  disabled={role === "admin" || item.balCopies < 1}
+                  disabled={role === "admin" || item.balCopies < 1 || warning}
                   onClick={() => handleCheckout(item.id)}
                 >
                   Checkout
