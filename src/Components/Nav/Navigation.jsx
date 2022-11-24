@@ -5,14 +5,12 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 
 function Navigation() {
-  const [showDropdown, setShowDropdown] = useState(false);
 
   const navigate = useNavigate();
   const role = localStorage.getItem("userRole");
   console.log(role);
 
   const handleClick = () => {
-    setShowDropdown(!showDropdown);
     localStorage.clear();
     navigate("/login");
   };
